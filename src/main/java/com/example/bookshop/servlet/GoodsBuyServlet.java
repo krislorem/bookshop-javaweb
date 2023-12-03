@@ -1,14 +1,14 @@
-package servlet;
+package com.example.bookshop.servlet;
 
-import model.Goods;
-import model.Order;
-import service.GoodsService;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import com.example.bookshop.model.Goods;
+import com.example.bookshop.model.Order;
+import com.example.bookshop.service.GoodsService;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name = "goods_buy",urlPatterns = "/goods_buy")

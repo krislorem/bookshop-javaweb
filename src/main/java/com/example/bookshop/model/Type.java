@@ -1,4 +1,4 @@
-package model;
+package com.example.bookshop.model;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

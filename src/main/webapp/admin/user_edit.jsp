@@ -8,6 +8,50 @@
 	<title>客户修改</title>
 	<meta charset="utf-8"/>
 	<link rel="stylesheet" href="css/bootstrap.css"/>
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.validate.min.js"></script>
+	<script src="js/messages_zh.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			// 项目一开始就要初始化验证
+			$("#useredit").validate({
+				errorElement: 'span',
+				errorClass: 'error-block',
+				onfocusout: function(element) { $(element).valid(); },
+				rules: {
+					name: {
+						required: true
+					},
+					phone: {
+						required: true,
+						phone: true
+					},
+					address: {
+						required: true
+					}
+				},
+				messages: {
+					name: {
+						required: "请输入用户名",
+					},
+					phone: {
+						required: "请输入电话",
+						phone: "请输入正确的电话号码"
+					},
+					address: {
+						required: "请输入地址"
+					}
+				}
+			})
+
+			// 自定义验证电话
+			jQuery.validator.addMethod("phone", function(value, element) {
+				var phone = /^1[34578][0-9]{9}$/;
+				return this.optional(element) || (phone.test(value));
+			}, "请输入正确格式的邮箱");
+		})
+
+	</script>
 </head>
 <body>
 <div class="container-fluid">
@@ -16,32 +60,32 @@
 
 	<br><br>
 
-	<form class="form-horizontal" action="${pageContext.request.contextPath }/admin/user_edit" method="post">
+	<form id="useredit" class="form-horizontal" action="${pageContext.request.contextPath }/admin/user_edit" method="post">
 		<input type="hidden" name="id" value="${u.id }">
 		<div class="form-group">
-			<label for="input_name" class="col-sm-1 control-label">用户名</label>
-			<div class="col-sm-5">${u.username }</div>
+			<label for="username" class="col-sm-1 control-label">用户名</label>
+			<div id="username" class="col-sm-5">${u.username }</div>
 		</div>
 		<div class="form-group">
-			<label for="input_name" class="col-sm-1 control-label">邮箱</label>
-			<div class="col-sm-5">${u.email }</div>
+			<label for="email" class="col-sm-1 control-label">邮箱</label>
+			<div id="email" class="col-sm-5">${u.email }</div>
 		</div>
 		<div class="form-group">
-			<label for="input_name" class="col-sm-1 control-label">收货人</label>
+			<label for="name" class="col-sm-1 control-label">收货人</label>
 			<div class="col-sm-6">
-				<input type="text" class="form-control" id="input_name" name="name" value="${u.name }">
+				<input type="text" class="form-control" id="name" name="name" value="${u.name }">
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="input_name" class="col-sm-1 control-label">电话</label>
+			<label for="phone" class="col-sm-1 control-label">电话</label>
 			<div class="col-sm-6">
-				<input type="text" class="form-control" id="input_name" name="phone" value="${u.phone }">
+				<input type="text" class="form-control" id="phone" name="phone" value="${u.phone }">
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="input_name" class="col-sm-1 control-label">地址</label>
+			<label for="address" class="col-sm-1 control-label">地址</label>
 			<div class="col-sm-6">
-				<input type="text" class="form-control" id="input_name" name="address" value="${u.address }">
+				<input type="text" class="form-control" id="address" name="address" value="${u.address }">
 			</div>
 		</div>
 		<div class="form-group">

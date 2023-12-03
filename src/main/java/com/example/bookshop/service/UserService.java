@@ -1,8 +1,8 @@
-package service;
+package com.example.bookshop.service;
 
-import dao.UserDao;
-import model.Page;
-import model.User;
+import com.example.bookshop.dao.UserDao;
+import com.example.bookshop.model.Page;
+import com.example.bookshop.model.User;
 
 import java.sql.SQLException;
 import java.util.List;

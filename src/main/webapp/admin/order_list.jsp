@@ -1,4 +1,4 @@
-<%@ page import="model.Order" %>
+<%@ page import="com.example.bookshop.model.Order" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -10,6 +10,36 @@
 	<link rel="stylesheet" href="css/bootstrap.css"/>
 	<link rel="stylesheet" href="css/admin.css"/>
 	<link rel="shortcut icon" href="https://pic1.imgdb.cn/item/635d4e7f16f2c2beb1394e9a.png">
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.validate.min.js"></script>
+	<script src="js/messages_zh.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			// 项目一开始就要初始化验证
+			$("#goodsadd").validate({
+				errorElement: 'span',
+				errorClass: 'error-block',
+				onfocusout: function(element) { $(element).valid(); },
+				rules: {
+					price: {
+						required: true,
+						price: true
+					}
+				},
+				messages: {
+					price: {
+						required: "请输入价格",
+					},
+				}
+			})
+
+			// 自定义验证价格
+			jQuery.validator.addMethod("price", function(value, element) {
+				var price = /^([1-9][0-9]*|0)(\.[0-9]*[1-9])?$/;
+				return this.optional(element) || (price.test(value));
+			}, "请输入正确的价格");
+		})
+	</script>
 </head>
 <body>
 <div class="container-fluid">

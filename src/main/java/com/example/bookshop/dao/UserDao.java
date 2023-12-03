@@ -1,11 +1,11 @@
-package dao;
+package com.example.bookshop.dao;
 
-import model.User;
+import com.example.bookshop.model.User;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
-import utils.DataSourceUtils;
+import com.example.bookshop.utils.DataSourceUtils;
 
 import java.sql.SQLException;
 import java.util.List;

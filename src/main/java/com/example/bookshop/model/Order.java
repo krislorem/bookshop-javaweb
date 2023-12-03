@@ -1,9 +1,12 @@
-package model;
+package com.example.bookshop.model;
 
-import utils.PriceUtils;
+import com.example.bookshop.utils.PriceUtils;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @className: Order

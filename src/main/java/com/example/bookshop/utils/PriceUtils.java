@@ -1,4 +1,4 @@
-package utils;
+package com.example.bookshop.utils;
 
 import java.math.BigDecimal;
 

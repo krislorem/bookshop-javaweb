@@ -1,4 +1,4 @@
-package model;
+package com.example.bookshop.model;
 
 public class User {
     private int id;

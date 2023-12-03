@@ -1,4 +1,4 @@
-package test;
+package com.example.bookshop.test;
 
 import java.time.LocalDateTime;
 

@@ -1,13 +1,17 @@
-package dao;
+package com.example.bookshop.dao;
 
-import model.Goods;
-import model.Recommend;
-import org.apache.commons.dbutils.*;
-import org.apache.commons.dbutils.handlers.*;
-import utils.DataSourceUtils;
+import com.example.bookshop.model.Goods;
+import com.example.bookshop.model.Recommend;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.MapListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
+import com.example.bookshop.utils.DataSourceUtils;
 
 import java.sql.SQLException;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @className: GoodsDao

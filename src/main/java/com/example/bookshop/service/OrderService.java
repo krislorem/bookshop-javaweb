@@ -1,10 +1,11 @@
-package service;
+package com.example.bookshop.service;
 
-import dao.*;
-import model.*;
-import utils.*;
+import com.example.bookshop.dao.*;
+import com.example.bookshop.model.*;
+import com.example.bookshop.utils.*;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 public class OrderService {

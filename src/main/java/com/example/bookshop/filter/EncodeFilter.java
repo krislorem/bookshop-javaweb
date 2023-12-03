@@ -1,8 +1,7 @@
-package filter;
+package com.example.bookshop.filter;
 
-import jakarta.servlet.*;
-import jakarta.servlet.annotation.WebFilter;
-import model.User;
+import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 
 import java.io.IOException;
 

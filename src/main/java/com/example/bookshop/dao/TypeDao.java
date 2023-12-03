@@ -1,10 +1,10 @@
-package dao;
+package com.example.bookshop.dao;
 
-import model.Type;
+import com.example.bookshop.model.Type;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
-import utils.DataSourceUtils;
+import com.example.bookshop.utils.DataSourceUtils;
 
 import java.sql.SQLException;
 import java.util.List;

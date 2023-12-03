@@ -1,4 +1,4 @@
-<%@ page import="model.Order" %>
+<%@ page import="com.example.bookshop.model.Order" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.time.LocalDateTime" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>

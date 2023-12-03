@@ -1,4 +1,4 @@
-package model;
+package com.example.bookshop.model;
 
 public class Recommend {
 	private int id;

@@ -1,12 +1,15 @@
-package dao;
+package com.example.bookshop.dao;
 
-import model.*;
-import org.apache.commons.dbutils.*;
-import utils.*;
-import java.math.*;
-import java.sql.*;
-import java.util.*;
-import org.apache.commons.dbutils.handlers.*;
+import com.example.bookshop.model.*;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
+import com.example.bookshop.utils.*;
+
+import java.math.BigInteger;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
 
 public class OrderDao {
     public void insertOrder(Connection con, Order order) throws SQLException {

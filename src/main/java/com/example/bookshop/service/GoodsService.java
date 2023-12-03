@@ -1,18 +1,9 @@
-package service;
+package com.example.bookshop.service;
 
-import dao.GoodsDao;
-import model.Goods;
-import model.Page;
+import com.example.bookshop.dao.GoodsDao;
+import com.example.bookshop.model.Goods;
+import com.example.bookshop.model.Page;
 
-// https://www.matools.com/api  api 在线
-// https://www.apiref.com/java11-zh/index.html   java 11 api
-/* https://www.apiref.com/java11-zh/jdk.charsets/module-summary.html
- *  jdk.charsets  提供不在java.base中的java.base （主要是双字节和IBM字符集）。
- *  import sun.nio.cs.ext.IBM037
- */
-
-
-// import javax.management.monitor.StringMonitorMBean;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;

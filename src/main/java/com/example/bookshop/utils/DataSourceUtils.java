@@ -1,4 +1,4 @@
-package utils;
+package com.example.bookshop.utils;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 

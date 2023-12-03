@@ -1,7 +1,7 @@
-package service;
+package com.example.bookshop.service;
 
-import dao.TypeDao;
-import model.Type;
+import com.example.bookshop.dao.TypeDao;
+import com.example.bookshop.model.Type;
 
 import java.sql.SQLException;
 import java.util.List;

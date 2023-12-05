@@ -2,24 +2,13 @@ package com.example.bookshop.dao;
 
 import com.example.bookshop.model.Goods;
 import com.example.bookshop.model.Recommend;
-import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.BeanHandler;
-import org.apache.commons.dbutils.handlers.BeanListHandler;
-import org.apache.commons.dbutils.handlers.MapListHandler;
-import org.apache.commons.dbutils.handlers.ScalarHandler;
+import org.apache.commons.dbutils.*;
+import org.apache.commons.dbutils.handlers.*;
 import com.example.bookshop.utils.DataSourceUtils;
 
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-/**
- * @className: GoodsDao
- * @author: Lin
- * @描述: 对数据库商品表进行增删改查等操作
- * @date: 2022/12/10 14:28
- * @version: 1.0
- */
 public class GoodsDao {
     //select g.id,g.name,g.cover,g.price,t.name typename from recommend r,goods g,type t where type=2 and r.goods_id=g.id and g.type_id=t.id
     //根据推荐类型获取商品列表
@@ -41,18 +30,18 @@ public class GoodsDao {
         {
             String sql="select * from goods limit ? , ?";
             QueryRunner r=new QueryRunner(DataSourceUtils.getDataSource());
-            return  r.query(sql,new BeanListHandler<Goods>(Goods.class),(pageNumber-1)*pageSize,pageSize);
+            return  r.query(sql, new BeanListHandler<>(Goods.class),(pageNumber-1)*pageSize,pageSize);
         }
         else
         {
             String sql="select * from goods where type_id=? limit ? , ?";
             QueryRunner r=new QueryRunner(DataSourceUtils.getDataSource());
-            return  r.query(sql,new BeanListHandler<Goods>(Goods.class),typeID,(pageNumber-1)*pageSize,pageSize);
+            return  r.query(sql, new BeanListHandler<>(Goods.class),typeID,(pageNumber-1)*pageSize,pageSize);
         }
     }
     //计算该类型商品数
     public int getCountOfGoodsByTypeID(int typeID) throws SQLException {
-        String sql="";
+        String sql;
         QueryRunner r=new QueryRunner(DataSourceUtils.getDataSource());
         if(typeID==0)
         {
@@ -72,13 +61,13 @@ public class GoodsDao {
             //当不添加推荐类型限制的时候
 //            String sql = " select g.id,g.name,g.cover,g.image1,g.image2,g.intro,g.price,g.stock,t.name typename from goods g,type t where g.type_id=t.id order by g.id limit ?,?";
             String sql = " select g.id,g.name,g.cover,g.image1,g.image2,g.author,g.press,g.isbn,g.intro,g.price,g.stock,t.name typename from goods g,type t where g.type_id=t.id order by g.id limit ?,?";
-            return r.query(sql, new BeanListHandler<Goods>(Goods.class),(pageNumber-1)*pageSize,pageSize);
+            return r.query(sql, new BeanListHandler<>(Goods.class),(pageNumber-1)*pageSize,pageSize);
 
         }
 
 //        String sql = " select g.id,g.name,g.cover,g.image1,g.image2,g.intro,g.price,g.stock,t.name typename from goods g,recommend r,type t where g.id=r.goods_id and g.type_id=t.id and r.type=? order by g.id limit ?,?";
         String sql = " select g.id,g.name,g.cover,g.image1,g.image2,g.author,g.press,g.isbn,g.intro,g.price,g.stock,t.name typename from goods g,recommend r,type t where g.id=r.goods_id and g.type_id=t.id and r.type=? order by g.id limit ?,?";
-        return r.query(sql, new BeanListHandler<Goods>(Goods.class),type,(pageNumber-1)*pageSize,pageSize);
+        return r.query(sql, new BeanListHandler<>(Goods.class),type,(pageNumber-1)*pageSize,pageSize);
     }
     //获取该推荐类型商品总数
     public int getRecommendCountOfGoodsByTypeID(int type) throws SQLException {
@@ -92,7 +81,7 @@ public class GoodsDao {
         QueryRunner r = new QueryRunner(DataSourceUtils.getDataSource());
 //        String sql = "select g.id,g.name,g.cover,g.image1,g.image2,g.price,g.intro,g.stock,t.id typeid,t.name typename from goods g,type t where g.id = ? and g.type_id=t.id";
         String sql = "select g.id,g.name,g.cover,g.image1,g.image2,g.author,g.press,g.isbn,g.price,g.intro,g.stock,t.id typeid,t.name typename from goods g,type t where g.id = ? and g.type_id=t.id";
-        return r.query(sql, new BeanHandler<Goods>(Goods.class),id);
+        return r.query(sql, new BeanHandler<>(Goods.class),id);
     }
     //模糊搜索计数
     public int getSearchCount(String keyword) throws SQLException {
@@ -105,7 +94,7 @@ public class GoodsDao {
         QueryRunner r = new QueryRunner(DataSourceUtils.getDataSource());
 //        String sql = "select * from goods where name like ? limit ?,?";
         String sql = "select * from goods where concat(name,author) like ? limit ?,?";   //多字段查询
-        return r.query(sql, new BeanListHandler<Goods>(Goods.class),"%"+keyword+"%",(pageNumber-1)*pageSize,pageSize);
+        return r.query(sql, new BeanListHandler<>(Goods.class),"%"+keyword+"%",(pageNumber-1)*pageSize,pageSize);
     }
     //是属于推荐栏(轮播)商品
     public boolean isScroll(Goods g) throws SQLException {
@@ -123,12 +112,8 @@ public class GoodsDao {
     private boolean isRecommend(Goods g,int type) throws SQLException {
         QueryRunner r = new QueryRunner(DataSourceUtils.getDataSource());
         String sql = "select * from recommend where type=? and goods_id=?";
-        Recommend recommend = r.query(sql, new BeanHandler<Recommend>(Recommend.class),type,g.getId());
-        if(recommend==null) {
-            return false;
-        }else {
-            return true;
-        }
+        Recommend recommend = r.query(sql, new BeanHandler<>(Recommend.class),type,g.getId());
+        return recommend != null;
     }
     //将该商品插入(推荐、热销、新品)类型
     public void addRecommend(int id,int type) throws SQLException {

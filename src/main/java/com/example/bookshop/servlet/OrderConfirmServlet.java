@@ -1,27 +1,33 @@
 package com.example.bookshop.servlet;
 
+import com.example.bookshop.model.Order;
+import com.example.bookshop.model.User;
+import com.example.bookshop.service.OrderService;
+import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.beanutils.BeanUtils;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.example.bookshop.model.*;
-import org.apache.commons.beanutils.BeanUtils;
-import com.example.bookshop.service.OrderService;
-
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDateTime;
 
-@WebServlet(name = "order_confirm",urlPatterns = "/order_confirm")
+@Slf4j
+@WebServlet(name = "order_confirm", urlPatterns = "/order_confirm")
 public class OrderConfirmServlet extends HttpServlet {
-    private OrderService oService = new OrderService();
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private final OrderService oService = new OrderService();
+
+    @Override
+    protected void doPost(@NonNull HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Order o = (Order) request.getSession().getAttribute("order");
         try {
             BeanUtils.copyProperties(o, request.getParameterMap());
         } catch (IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
+            log.info("IllegalAccessException | InvocationTargetException", e);
         }
 //        o.setDatetime(new Date());
         o.setDatetime(LocalDateTime.now());
@@ -34,6 +40,7 @@ public class OrderConfirmServlet extends HttpServlet {
         request.getRequestDispatcher("order_success.jsp").forward(request, response);
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.doPost(request, response);
     }

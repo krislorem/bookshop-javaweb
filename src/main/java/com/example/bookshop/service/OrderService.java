@@ -3,13 +3,14 @@ package com.example.bookshop.service;
 import com.example.bookshop.dao.*;
 import com.example.bookshop.model.*;
 import com.example.bookshop.utils.*;
+import lombok.extern.slf4j.Slf4j;
 
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
-
+@SuppressWarnings("rawtypes,unchecked")
+@Slf4j
 public class OrderService {
-    private OrderDao oDao = new OrderDao();
+    private final OrderDao oDao = new OrderDao();
     public void addOrder(Order order) {
         Connection con = null;
         try {
@@ -25,14 +26,13 @@ public class OrderService {
 
             con.commit();
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+          log.info("SQLException",e);
             if(con!=null)
                 try {
                     con.rollback();
                 } catch (SQLException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
+                    log.info("SQLException",e);
+
                 }
         }
     }
@@ -45,8 +45,8 @@ public class OrderService {
                 o.setItemList(l);
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            log.info("SQLException",e);
+
         }
         return list;
     }
@@ -58,8 +58,8 @@ public class OrderService {
         try {
             totalCount = oDao.getOrderCount(status);
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            log.info("SQLException",e);
+
         }
         p.SetPageSizeAndTotalCount(pageSize, totalCount);
         List list=null;
@@ -70,8 +70,8 @@ public class OrderService {
                 o.setItemList(l);
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            log.info("SQLException",e);
+
         }
         p.setList(list);
         return p;
@@ -80,7 +80,8 @@ public class OrderService {
         try {
             oDao.updateStatus(id, status);
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.info("SQLException",e);
+
         }
     }
     public void delete(int id) {
@@ -93,12 +94,14 @@ public class OrderService {
             oDao.deleteOrder(con, id);
             con.commit();
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.info("SQLException",e);
+
             if(con!=null)
                 try {
                     con.rollback();
                 } catch (SQLException e1) {
-                    e1.printStackTrace();
+                    log.info("SQLException",e);
+
                 }
         }
     }

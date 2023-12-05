@@ -9,7 +9,7 @@ import com.example.bookshop.utils.DataSourceUtils;
 
 import java.sql.SQLException;
 import java.util.List;
-
+@SuppressWarnings("rawtypes")
 public class UserDao {
     public void addUser(User user) throws SQLException {
         QueryRunner r = new QueryRunner(DataSourceUtils.getDataSource());
@@ -19,37 +19,29 @@ public class UserDao {
     public boolean isUsernameExist(String username) throws SQLException {
         QueryRunner r = new QueryRunner(DataSourceUtils.getDataSource());
         String sql = "select * from user where username = ?";
-        User u = r.query(sql, new BeanHandler<User>(User.class),username);
-        if(u==null) {
-            return false;
-        }else {
-            return true;
-        }
+        User u = r.query(sql, new BeanHandler<>(User.class),username);
+        return u != null;
     }
     public boolean isEmailExist(String email) throws SQLException {
         QueryRunner r = new QueryRunner(DataSourceUtils.getDataSource());
         String sql = "select * from user where email = ?";
-        User u = r.query(sql, new BeanHandler<User>(User.class),email);
-        if(u==null) {
-            return false;
-        }else {
-            return true;
-        }
+        User u = r.query(sql, new BeanHandler<>(User.class),email);
+        return u != null;
     }
     public User selectByUsernamePassword(String username,String password) throws SQLException {
         QueryRunner r = new QueryRunner(DataSourceUtils.getDataSource());
         String sql = "select * from user where username=? and password=?";
-        return r.query(sql, new BeanHandler<User>(User.class),username,password);
+        return r.query(sql, new BeanHandler<>(User.class),username,password);
     }
     public User selectByEmailPassword(String email,String password) throws SQLException {
         QueryRunner r = new QueryRunner(DataSourceUtils.getDataSource());
         String sql = "select * from user where email=? and password=?";
-        return r.query(sql, new BeanHandler<User>(User.class),email,password);
+        return r.query(sql, new BeanHandler<>(User.class),email,password);
     }
     public User selectById(int id) throws SQLException {
         QueryRunner r = new QueryRunner(DataSourceUtils.getDataSource());
         String sql = "select * from user where id=?";
-        return r.query(sql, new BeanHandler<User>(User.class),id);
+        return r.query(sql, new BeanHandler<>(User.class),id);
     }
 
     public void updateUserAddress(User user) throws SQLException {
@@ -71,7 +63,7 @@ public class UserDao {
     public List selectUserList(int pageNo, int pageSize) throws SQLException {
         QueryRunner r = new QueryRunner(DataSourceUtils.getDataSource());
         String sql = "select * from user limit ?,?";
-        return r.query(sql, new BeanListHandler<User>(User.class), (pageNo-1)*pageSize,pageSize );
+        return r.query(sql, new BeanListHandler<>(User.class), (pageNo-1)*pageSize,pageSize );
     }
     public void delete(int id) throws SQLException {
         QueryRunner r = new QueryRunner(DataSourceUtils.getDataSource());

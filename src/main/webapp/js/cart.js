@@ -4,6 +4,7 @@
  */
 function buy(goodid){
 	$.post("goods_buy", {goodsid:goodid}, function(data){
+        console.log(goodid)
 		if(data=="ok")
 		{
 			layer.msg("添加到购物车!", {time:800}, function(){

@@ -1,10 +1,11 @@
 package com.example.bookshop.dao;
 
-import com.example.bookshop.model.*;
+import com.example.bookshop.model.Order;
+import com.example.bookshop.model.OrderItem;
+import com.example.bookshop.utils.DataSourceUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
-import com.example.bookshop.utils.*;
 
 import java.math.BigInteger;
 import java.sql.Connection;
@@ -23,7 +24,7 @@ public class OrderDao {
     public int getLastInsertId(Connection con) throws SQLException {
         QueryRunner r = new QueryRunner();
         String sql = "select last_insert_id()";
-        BigInteger bi = r.query(con, sql,new ScalarHandler<BigInteger>());
+        BigInteger bi = r.query(con, sql, new ScalarHandler<>());
         return Integer.parseInt(bi.toString());
     }
     public void insertOrderItem(Connection con, OrderItem item) throws SQLException {
@@ -36,16 +37,16 @@ public class OrderDao {
         //无法设置日期时间：不兼容的类型，无法将java.time.LocalDateTime转换为java.util.Date 查询：从“订单”中选择*，其中user_id=？按日期时间描述排序
         //反引号：它是为了区分MYSQL的保留字与普通字符             order by 排序      desc降序
         String sql = "select * from `order` where user_id=? order by datetime desc";
-        return r.query(sql, new BeanListHandler<Order>(Order.class),userid);
+        return r.query(sql, new BeanListHandler<>(Order.class),userid);
     }
     public List<OrderItem> selectAllItem(int orderid) throws SQLException{
         QueryRunner r = new QueryRunner(DataSourceUtils.getDataSource());
         String sql = "select i.id,i.price,i.amount,g.name from orderitem i,goods g where order_id=? and i.goods_id=g.id";
-        return r.query(sql, new BeanListHandler<OrderItem>(OrderItem.class),orderid);
+        return r.query(sql, new BeanListHandler<>(OrderItem.class),orderid);
     }
     public int getOrderCount(int status) throws SQLException {
         QueryRunner r = new QueryRunner(DataSourceUtils.getDataSource());
-        String sql = "";
+        String sql;
         if(status==0) {
             sql = "select count(*) from `order`";
             return r.query(sql, new ScalarHandler<Long>()).intValue();
@@ -58,10 +59,10 @@ public class OrderDao {
         QueryRunner r = new QueryRunner(DataSourceUtils.getDataSource());
         if(status==0) {
             String sql = "select o.id,o.total,o.amount,o.status,o.paytype,o.name,o.phone,o.address,o.datetime,u.username from `order` o,user u where o.user_id=u.id order by o.datetime desc limit ?,?";
-            return r.query(sql, new BeanListHandler<Order>(Order.class), (pageNumber-1)*pageSize,pageSize );
+            return r.query(sql, new BeanListHandler<>(Order.class), (pageNumber-1)*pageSize,pageSize );
         }else {
             String sql = "select o.id,o.total,o.amount,o.status,o.paytype,o.name,o.phone,o.address,o.datetime,u.username from `order` o,user u where o.user_id=u.id and o.status=? order by o.datetime desc limit ?,?";
-            return r.query(sql, new BeanListHandler<Order>(Order.class),status, (pageNumber-1)*pageSize,pageSize );
+            return r.query(sql, new BeanListHandler<>(Order.class),status, (pageNumber-1)*pageSize,pageSize );
         }
     }
     public void updateStatus(int id,int status) throws SQLException {

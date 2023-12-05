@@ -13,17 +13,17 @@ public class TypeDao {
     public List<Type> GetAllType() throws SQLException {
         QueryRunner r=new QueryRunner(DataSourceUtils.getDataSource());
         String sql="select * from type";
-        return r.query(sql,new BeanListHandler<Type>(Type.class));
+        return r.query(sql, new BeanListHandler<>(Type.class));
     }
     public Type selectTypeNameByID(int typeid) throws SQLException {
         QueryRunner r=new QueryRunner(DataSourceUtils.getDataSource());
         String sql="select * from type where id=?";
-        return r.query(sql,new BeanHandler<Type>(Type.class),typeid);
+        return r.query(sql, new BeanHandler<>(Type.class),typeid);
     }
     public Type select(int id) throws SQLException {
         QueryRunner r = new QueryRunner(DataSourceUtils.getDataSource());
         String sql = "select * from type where id = ?";
-        return r.query(sql, new BeanHandler<Type>(Type.class),id);
+        return r.query(sql, new BeanHandler<>(Type.class),id);
     }
     public void insert(Type t) throws SQLException {
         QueryRunner r = new QueryRunner(DataSourceUtils.getDataSource());

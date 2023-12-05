@@ -1,16 +1,10 @@
 package com.example.bookshop.model;
 
 import com.example.bookshop.utils.PriceUtils;
-import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-@SuppressWarnings("unused")
-@Data
 public class Order {
     private int id;
     private float total;  //总价
@@ -24,8 +18,8 @@ public class Order {
     //    private Date datetime;  //订单日期 (日期格式与数据库的不兼容)
     private LocalDateTime datetime;  //订单日期(改后)
     private User user;
-    private Map<Integer,OrderItem> itemMap = new HashMap<>();
-    private List<OrderItem> itemList = new ArrayList<>();
+    private Map<Integer,OrderItem> itemMap = new HashMap<Integer,OrderItem>();
+    private List<OrderItem> itemList = new ArrayList<OrderItem>();
 
     public void setUsername(String username) {
         user = new User();
@@ -41,6 +35,10 @@ public class Order {
         }
         amount++;
         total = PriceUtils.add(total, g.getPrice());
+    }
+
+    public List<OrderItem> getItemList() {
+        return itemList;
     }
 
     public void setItemList(List<OrderItem> itemList) {
@@ -68,46 +66,71 @@ public class Order {
         }
     }
 
+    public Map<Integer, OrderItem> getItemMap() {
+        return itemMap;
+    }
+
     public void setItemMap(Map<Integer, OrderItem> itemMap) {
         this.itemMap = itemMap;
     }
 
+    public int getId() {
+        return id;
+    }
     public void setId(int id) {
         this.id = id;
     }
-
+    public float getTotal() {
+        return total;
+    }
     public void setTotal(float total) {
         this.total = total;
     }
-
+    public int getAmount() {
+        return amount;
+    }
     public void setAmount(int amount) {
         this.amount = amount;
     }
-
+    public int getStatus() {
+        return status;
+    }
     public void setStatus(int status) {
         this.status = status;
     }
-
+    public int getPaytype() {
+        return paytype;
+    }
     public void setPaytype(int paytype) {
         this.paytype = paytype;
     }
-
+    public String getName() {
+        return name;
+    }
     public void setName(String name) {
         this.name = name;
     }
-
+    public String getPhone() {
+        return phone;
+    }
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
+    public String getAddress() {
+        return address;
+    }
     public void setAddress(String address) {
         this.address = address;
     }
-
+    public LocalDateTime getDatetime() {
+        return datetime;
+    }
     public void setDatetime(LocalDateTime datetime) {
         this.datetime = datetime;
     }
-
+    public User getUser() {
+        return user;
+    }
     public void setUser(User user) {
         this.user = user;
     }

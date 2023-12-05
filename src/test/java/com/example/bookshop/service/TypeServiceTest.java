@@ -29,6 +29,7 @@ class TypeServiceTest {
 
     @Test
     void select() {
+        System.out.println(service.select(1));
     }
 
     @Test

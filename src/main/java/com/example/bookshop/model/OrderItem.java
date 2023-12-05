@@ -1,8 +1,5 @@
 package com.example.bookshop.model;
 
-import lombok.Data;
-
-@Data
 public class OrderItem {
     private int id;
     private float price;

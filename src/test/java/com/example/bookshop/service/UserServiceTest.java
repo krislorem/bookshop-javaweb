@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 @Slf4j
 class UserServiceTest {
+    UserService service = new UserService();
     @BeforeAll
     static void setUp() {
         log.info("UserServiceTest set up");
@@ -23,6 +24,7 @@ class UserServiceTest {
 
     @Test
     void login() {
+
     }
 
     @Test

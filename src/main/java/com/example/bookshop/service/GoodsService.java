@@ -11,7 +11,6 @@ import java.util.Map;
 
 /**
  * @className: GoodsService
- * @author: Lin
  * @discription: 处理商品的业务逻辑, 调用 GoodsDao层方法对数据库进行操作
  * 1.getGoodsList(推荐类型)                      获取该类型商品List
  * 2.getScrollGood()                            获取推荐栏(轮播)商品List

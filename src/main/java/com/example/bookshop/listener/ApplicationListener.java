@@ -12,8 +12,6 @@ import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
 /**
- * @className: ApplicationListener
- * @author: ZhaiJinPei
  * @discription: 监听器
  */
 @WebListener()

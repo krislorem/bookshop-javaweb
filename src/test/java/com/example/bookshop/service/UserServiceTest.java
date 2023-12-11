@@ -1,5 +1,6 @@
 package com.example.bookshop.service;
 
+import com.example.bookshop.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -20,15 +21,18 @@ class UserServiceTest {
 
     @Test
     void register() {
+        User user = new User("xas","cas","ca","csc","ca","ca");
+        log.info(String.valueOf(service.register(user)));
     }
 
     @Test
     void login() {
-
+        log.info(service.login("admin","admin").toString());
     }
 
     @Test
     void selectById() {
+        log.info(service.selectById(8).toString());
     }
 
     @Test
@@ -41,6 +45,7 @@ class UserServiceTest {
 
     @Test
     void getUserPage() {
+        log.info(service.getUserPage(1).toString());
     }
 
     @Test

@@ -1,17 +1,15 @@
 package com.example.bookshop.service;
 
-import com.example.bookshop.dao.GoodsDao;
+import com.example.bookshop.mapper.GoodsMapper;
 import com.example.bookshop.model.Goods;
 import com.example.bookshop.model.Page;
+import com.example.bookshop.utils.MyBatisUtils;
 import lombok.extern.slf4j.Slf4j;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
 /**
- * @className: GoodsService
- * @author: Lin
  * @discription: 处理商品的业务逻辑, 调用 GoodsDao层方法对数据库进行操作
  * 1.getGoodsList(推荐类型)                      获取该类型商品List
  * 2.getScrollGood()                            获取推荐栏(轮播)商品List
@@ -25,64 +23,28 @@ import java.util.Map;
  * 10.insert(Goods goods)                       新增商品
  * 11.update(Goods goods)                       修改商品
  * 12.delete(商品id)                             删除商品
- * @version: 1.0
  */
 @Slf4j
 @SuppressWarnings("unchecked,rawtypes")
 public class GoodsService {
-    private final GoodsDao gDao = new GoodsDao();
-
     public List<Map<String, Object>> getGoodsList(int recommendType) {
-        List<Map<String, Object>> list = null;
-        try {
-            list = gDao.getGoodsList(recommendType);
-        } catch (Exception e) {
-            log.info("SQLException", e);
-        }
-        return list;
+        return (List<Map<String, Object>>) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).getGoodsList(recommendType));
     }
 
     public List<Map<String, Object>> getScrollGood() {
-        List<Map<String, Object>> list = null;
-        try {
-            list = gDao.getScrollGood();
-        } catch (Exception e) {
-            log.info("SQLException", e);
-        }
-        return list;
+        return (List<Map<String, Object>>) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).getScrollGood());
     }
 
     public List<Goods> selectGoodsByTypeID(int typeID, int pageNumber, int pageSize) {
-        List<Goods> list = null;
-        try {
-            list = gDao.selectGoodsByTypeID(typeID, pageNumber, pageSize);
-        } catch (SQLException e) {
-            log.info("SQLException", e);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        return list;
+        return (List<Goods>) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).selectGoodsByTypeID(typeID, pageNumber, pageSize));
     }
 
     public Page selectPageByTypeID(int typeID, int pageNumber) {
         Page p = new Page();
         p.setPageNumber(pageNumber);
-        int totalCount = 0;
-        try {
-            totalCount = gDao.getCountOfGoodsByTypeID(typeID);    //获取该类商品总数
-        } catch (Exception e) {
-            log.info("SQLException", e);
-
-        }
+           int totalCount = (int) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).getCountOfGoodsByTypeID(typeID));    //获取该类商品总数
         p.SetPageSizeAndTotalCount(8, totalCount);      //设置页大小及该类商品总数
-
-        List list = null;
-        try {
-            list = gDao.selectGoodsByTypeID(typeID, pageNumber, 8);    //根据商品类型id查找得商品List
-        } catch (Exception e) {
-            log.info("SQLException", e);
-        }
-
+          List  list = (List<Goods>) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).selectGoodsByTypeID(typeID, pageNumber, 8));    //根据商品类型id查找得商品List
         p.setList(list);   //存入Page.List<Object>
         return p;
     }
@@ -90,99 +52,49 @@ public class GoodsService {
     public Page getGoodsRecommendPage(int type, int pageNumber) {
         Page p = new Page();
         p.setPageNumber(pageNumber);
-        int totalCount = 0;
-        try {
-            totalCount = gDao.getRecommendCountOfGoodsByTypeID(type);
-        } catch (Exception e) {
-            log.info("SQLException", e);
-        }
+          int  totalCount = (int) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).getRecommendCountOfGoodsByTypeID(type));
         p.SetPageSizeAndTotalCount(8, totalCount);
-        List list = null;
-        try {
-            list = gDao.selectGoodsbyRecommend(type, pageNumber, 8);   //推荐类型所有商品详情List
+           List list = (List<Goods>) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).selectGoodsByRecommend(type, (pageNumber - 1) * 8, 8));   //推荐类型所有商品详情List
             for (Goods g : (List<Goods>) list) {
-                g.setScroll(gDao.isScroll(g));
-                g.setHot(gDao.isHot(g));
-                g.setNew(gDao.isNew(g));
+                g.setScroll((boolean) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).isScroll(g)));
+                g.setHot((boolean) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).isHot(g)));
+                g.setNew((boolean) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).isNew(g)));
             }
-        } catch (Exception e) {
-            log.info("SQLException", e);
-        }
         p.setList(list);
         return p;
     }
 
     public Goods getGoodsById(int id) {
-        Goods g = null;
-        try {
-            g = gDao.getGoodsById(id);
-        } catch (Exception e) {
-            log.info("SQLException", e);
-        }
-        return g;
+        return (Goods) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).getGoodsById(id));
     }
 
     public Page getSearchGoodsPage(String keyword, int pageNumber) {
         Page p = new Page();
         p.setPageNumber(pageNumber);
-        int totalCount = 0;
-        try {
-//			totalCount = gDao.getGoodsCount(typeId);
-            totalCount = gDao.getSearchCount(keyword);
-        } catch (Exception e) {
-            log.info("SQLException", e);
-        }
+            int totalCount = (int) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).getSearchCount(keyword));
         p.SetPageSizeAndTotalCount(8, totalCount);
-        List list = null;
-        try {
-//			list = gDao.selectGoods(keyword, pageNo, 8);
-            list = gDao.selectSearchGoods(keyword, pageNumber, 8);
-        } catch (Exception e) {
-            log.info("SQLException", e);
-        }
+          List  list = (List<Goods>) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).selectSearchGoods(keyword, (pageNumber - 1) * 8, 8));
         p.setList(list);
         return p;
     }
 
     public void addRecommend(int id, int type) {
-        try {
-            gDao.addRecommend(id, type);
-        } catch (Exception e) {
-            log.info("SQLException", e);
-        }
+            MyBatisUtils.executeUpdate(sqlSession -> sqlSession.getMapper(GoodsMapper.class).addRecommend(id, type));
     }
 
     public void removeRecommend(int id, int type) {
-        try {
-            gDao.removeRecommend(id, type);
-        } catch (Exception e) {
-            log.info("SQLException", e);
-        }
+            MyBatisUtils.executeUpdate(sqlSession -> sqlSession.getMapper(GoodsMapper.class).removeRecommend(id, type));
     }
 
     public void insert(Goods goods) {
-        try {
-            gDao.insert(goods);
-        } catch (Exception e) {
-            log.info("SQLException", e);
-        }
+            MyBatisUtils.executeUpdate(sqlSession -> sqlSession.getMapper(GoodsMapper.class).insert(goods));
     }
 
     public void update(Goods goods) {
-        try {
-            gDao.update(goods);
-        } catch (Exception e) {
-            log.info("SQLException", e);
-
-        }
+            MyBatisUtils.executeUpdate(sqlSession -> sqlSession.getMapper(GoodsMapper.class).update(goods));
     }
 
     public void delete(int id) {
-        try {
-            gDao.delete(id);
-        } catch (Exception e) {
-            log.info("SQLException", e);
-
-        }
+        MyBatisUtils.executeUpdate(sqlSession -> sqlSession.getMapper(GoodsMapper.class).delete(id));
     }
 }

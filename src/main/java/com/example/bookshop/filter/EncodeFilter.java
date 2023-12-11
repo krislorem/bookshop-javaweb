@@ -7,8 +7,6 @@ import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
 /**
- * @className: EncodeFilter
- * @author: ZhaiJinPei
  * @discription: 过滤器: 统一全站编码，以防止出现乱码
  */
 @WebFilter(filterName = "EncodeFilter", urlPatterns = "/*")

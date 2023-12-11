@@ -2,8 +2,6 @@ package com.example.bookshop.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 @Slf4j
 class OrderServiceTest {
 OrderService service = new OrderService();
@@ -19,7 +17,7 @@ OrderService service = new OrderService();
 
     @Test
     void getOrderPage() {
-
+       log.info(service.getOrderPage(2,2).toString());
     }
 
     @Test

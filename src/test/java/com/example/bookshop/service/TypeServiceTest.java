@@ -1,5 +1,7 @@
 package com.example.bookshop.service;
 
+import com.example.bookshop.mapper.TypeMapper;
+import com.example.bookshop.utils.MyBatisUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -42,5 +44,6 @@ class TypeServiceTest {
 
     @Test
     void delete() {
+        log.info(MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(TypeMapper.class).delete(18)).toString());
     }
 }

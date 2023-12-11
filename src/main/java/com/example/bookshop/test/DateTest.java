@@ -2,11 +2,10 @@ package com.example.bookshop.test;
 
 import java.time.LocalDateTime;
 
-public class Test {
-    public static void main(String[] args) {
+public class DateTest {
+    public static String localDateTime() {
         System.out.println("LocalDateTime.now() = " + LocalDateTime.now());
-
         String s = LocalDateTime.now().toString();
-        System.out.println("替换掉T = " + s.replace("T", " "));
+        return "替换掉T = " + s.replace("T", " ");
     }
 }

@@ -54,7 +54,7 @@ class GoodsServiceTest {
     @Test
     void selectPageByTypeID() {
         log.info("selectPageByTypeID" );
-        System.out.println(service.selectPageByTypeID(1, 1));
+        log.info(service.selectPageByTypeID(1, 1).toString());
     }
 
     /**
@@ -63,7 +63,7 @@ class GoodsServiceTest {
     @Test
     void getGoodsRecommendPage() {
         log.info("getGoodsRecommendPage");
-        System.out.println(service.getGoodsRecommendPage(1, 1));
+        log.info(service.getGoodsRecommendPage(1, 1).toString());
     }
 
     /**
@@ -72,7 +72,7 @@ class GoodsServiceTest {
     @Test
     void getGoodsById() {
         log.info("getGoodsById");
-        System.out.println(service.getGoodsById(1));
+        log.info(service.getGoodsById(2).toString());
     }
 
     /**
@@ -81,7 +81,7 @@ class GoodsServiceTest {
     @Test
     void getSearchGoodsPage() {
         log.info("getSearchGoodsPage");
-        System.out.println(service.getSearchGoodsPage("java核心技术", 1));
+        log.info(service.getSearchGoodsPage("java核心技术", 1).toString());
     }
 
     /**
@@ -90,7 +90,7 @@ class GoodsServiceTest {
     @Test
     void addRecommend() {
         log.info("addRecommend");
-        service.addRecommend(1,1);
+        service.addRecommend(412,1);
     }
 
     /**
@@ -99,7 +99,7 @@ class GoodsServiceTest {
     @Test
     void removeRecommend() {
         log.info("removeRecommend");
-        service.removeRecommend(1,1);
+        service.removeRecommend(412,1);
     }
 
     /**
@@ -125,7 +125,7 @@ class GoodsServiceTest {
     @Test
     void update() {
         log.info("update");
-        Goods goods = service.getGoodsById(410);
+        Goods goods = service.getGoodsById(412);
         goods.setImage1("sad");
         service.update(goods);
     }
@@ -136,6 +136,6 @@ class GoodsServiceTest {
     @Test
     void delete() {
         log.info("Delete");
-        service.delete(410);
+        service.delete(412);
     }
 }

@@ -1,6 +1,8 @@
 package com.example.bookshop.model;
 
+import lombok.Data;
 
+@Data
 public class Goods {
     private int id;
     private String name;    //书名
@@ -56,13 +58,6 @@ public class Goods {
             type = new Type();
         }
         type.setName(typename);
-    }
-
-    @Override
-    public String toString() {
-        return "Goods [id=" + id + ", name=" + name + ", cover=" + cover + ", image1=" + image1 + ", image2=" + image2
-                + ", price=" + price + ", author=" + author + ", press=" + press + ", ISBN=" + isbn + ", intro=" + intro
-                + ", stock=" + stock + ", type=" + type + "]";
     }
 
     public int getId() {

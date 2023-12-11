@@ -1,7 +1,9 @@
 package com.example.bookshop.model;
 
 import lombok.Data;
+import lombok.Setter;
 
+@Setter
 @Data
 @SuppressWarnings("unused")
 public class User {
@@ -16,42 +18,6 @@ public class User {
     private boolean isadmin = false;   //是否为管理员
 
     private boolean isvalidate = false;   //账户是否有效
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setIsadmin(boolean isadmin) {
-        this.isadmin = isadmin;
-    }
-
-    public void setIsvalidate(boolean isvalidate) {
-        this.isvalidate = isvalidate;
-    }
 
     public User(int id, String username, String email, String password, String name, String phone, String address,
                 boolean isadmin, boolean isvalidate) {

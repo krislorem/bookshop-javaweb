@@ -1,71 +1,36 @@
 package com.example.bookshop.service;
 
-import com.example.bookshop.dao.TypeDao;
+import com.example.bookshop.mapper.TypeMapper;
 import com.example.bookshop.model.Type;
+import com.example.bookshop.utils.MyBatisUtils;
 import lombok.extern.slf4j.Slf4j;
 
-import java.sql.SQLException;
 import java.util.List;
 
 @Slf4j
+@SuppressWarnings("unchecked")
 public class TypeService {
-    TypeDao tDao = new TypeDao();
-
     public List<Type> GetAllType() {
-        List<Type> list = null;
-        try {
-            list = tDao.GetAllType();
-        } catch (Exception e) {
-            log.info("SQLException", e);
-        }
-        return list;
+        return (List<Type>) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(TypeMapper.class).GetAllType());
     }
 
     public Type selectTypeNameByID(Integer typeid) {
-        Type type = null;
-        try {
-            type = tDao.selectTypeNameByID(typeid);
-        } catch (Exception e) {
-            log.info("SQLException", e);
-        }
-        return type;
+        return (Type) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(TypeMapper.class).selectTypeNameByID(typeid));
     }
 
     public Type select(Integer id) {
-        Type t = null;
-        try {
-            t = tDao.select(id);
-        } catch (Exception e) {
-            log.info("SQLException", e);
-        }
-        return t;
+        return (Type) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(TypeMapper.class).select(id));
     }
 
     public void insert(Type t) {
-        try {
-            tDao.insert(t);
-        } catch (SQLException e) {
-            log.info("SQLException", e);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        MyBatisUtils.executeUpdate(sqlSession -> sqlSession.getMapper(TypeMapper.class).insert(t));
     }
 
     public void update(Type t) {
-        try {
-            tDao.update(t);
-        } catch (Exception e) {
-            log.info("SQLException", e);
-        }
+        MyBatisUtils.executeUpdate(sqlSession -> sqlSession.getMapper(TypeMapper.class).update(t));
     }
 
     public boolean delete(Integer id) {
-        try {
-            tDao.delete(id);
-            return true;
-        } catch (Exception e) {
-            log.info("SQLException", e);
-            return false;
-        }
+       return  MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(TypeMapper.class).delete(id)) == null;
     }
 }

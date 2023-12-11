@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 @Slf4j
@@ -33,7 +34,11 @@ public class OrderConfirmServlet extends HttpServlet {
         o.setDatetime(LocalDateTime.now());
         o.setStatus(2);
         o.setUser((User) request.getSession().getAttribute("user"));
-        oService.addOrder(o);
+        try {
+            oService.addOrder(o);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         request.getSession().removeAttribute("order");    //删除属性
 
         request.setAttribute("msg", "订单支付成功！");

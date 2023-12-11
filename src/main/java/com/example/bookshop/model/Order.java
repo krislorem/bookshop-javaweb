@@ -21,8 +21,8 @@ public class Order {
     //    private Date datetime;  //订单日期 (日期格式与数据库的不兼容)
     private LocalDateTime datetime;  //订单日期(改后)
     private User user;
-    private Map<Integer, OrderItem> itemMap = new HashMap<Integer, OrderItem>();
-    private List<OrderItem> itemList = new ArrayList<OrderItem>();
+    private Map<Integer, OrderItem> itemMap = new HashMap<>();
+    private List<OrderItem> itemList = new ArrayList<>();
 
     public void setUsername(String username) {
         user = new User();

@@ -5,7 +5,7 @@
       <paths name="110.42.231.172">
         <serverdata>
           <mappings>
-            <mapping deploy="/www/wwwroot" local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

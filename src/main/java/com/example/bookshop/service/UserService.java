@@ -1,16 +1,14 @@
 package com.example.bookshop.service;
 
-import com.example.bookshop.dao.UserDao;
+import com.example.bookshop.mapper.UserMapper;
 import com.example.bookshop.model.Page;
 import com.example.bookshop.model.User;
+import com.example.bookshop.utils.MyBatisUtils;
 import lombok.extern.slf4j.Slf4j;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
- * @className: UserService
- * @author: ZhaiJinPei
  * @discription: 处理用户的业务逻辑, 调用 UserDao层方法对数据库进行操作
  * 1.register(用户信息)   用户注册
  * 2.login(用户名,密码)   用户登录
@@ -23,98 +21,48 @@ import java.util.List;
 @SuppressWarnings("unchecked,rawtypes")
 @Slf4j
 public class UserService {
-    private final UserDao uDao = new UserDao();
-
     public boolean register(User user) {
-        try {
-            if (uDao.isUsernameExist(user.getUsername())) {
-                return false;
-            }
-            if (uDao.isEmailExist(user.getEmail())) {
-                return false;
-            }
-            uDao.addUser(user);
-            return true;
-        } catch (SQLException e) {
-            log.info("SQLException", e);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        if (
+                !((boolean) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(UserMapper.class).isEmailExist(user.getEmail()))
+                  && (boolean) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(UserMapper.class).isUsernameExist(user.getUsername())))
+        ) {
+            return MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(UserMapper.class).addUser(user)) == null;
         }
         return false;
     }
 
     public User login(String ue, String password) {
-        User user = null;
-        try {
-            user = uDao.selectByUsernamePassword(ue, password);
-        } catch (Exception e) {
-            log.info("SQLException", e);
-        }
-        if (user != null) {
-            return user;
-        }
-        try {
-            user = uDao.selectByEmailPassword(ue, password);
-        } catch (Exception e) {
-            log.info("SQLException", e);
-        }
-        return user;
+        User user = (User) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(UserMapper.class).selectByUsernamePassword(ue, password));
+        if (user != null) return user;
+        else
+            return (User) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(UserMapper.class).selectByEmailPassword(ue, password));
     }
 
     public User selectById(int id) {
-        User u = null;
-        try {
-            u = uDao.selectById(id);
-        } catch (Exception e) {
-            log.info("SQLException", e);
-        }
-        return u;
+        return (User) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(UserMapper.class).selectById(id));
     }
 
     public void updateUserAddress(User user) {
-        try {
-            uDao.updateUserAddress(user);
-        } catch (Exception e) {
-            log.info("SQLException", e);
-        }
+        MyBatisUtils.executeUpdate(sqlSession -> sqlSession.getMapper(UserMapper.class).updateUserAddress(user));
     }
 
     public void updatePwd(User user) {
-        try {
-            uDao.updatePwd(user);
-        } catch (Exception e) {
-            log.info("SQLException", e);
-        }
+        MyBatisUtils.executeUpdate(sqlSession -> sqlSession.getMapper(UserMapper.class).updatePwd(user));
     }
 
     public Page getUserPage(int pageNumber) {
         Page p = new Page();
         p.setPageNumber(pageNumber);
         int pageSize = 7;
-        int totalCount = 0;
-        try {
-            totalCount = uDao.selectUserCount();
-        } catch (Exception e) {
-            log.info("SQLException", e);
-        }
+        int totalCount = (int) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(UserMapper.class).selectUserCount());
+        log.info(String.valueOf(totalCount));
         p.SetPageSizeAndTotalCount(pageSize, totalCount);
-        List list = null;
-        try {
-            list = uDao.selectUserList(pageNumber, pageSize);
-        } catch (Exception e) {
-            log.info("SQLException", e);
-        }
+        List list = (List<User>) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(UserMapper.class).selectUserList((pageNumber - 1) * pageSize, pageSize));
         p.setList(list);
         return p;
     }
 
     public boolean delete(int id) {
-        try {
-            uDao.delete(id);
-            return true;
-        } catch (Exception e) {
-            log.info("SQLException", e);
-            return false;
-        }
+        return MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(UserMapper.class).delete(id)) == null;
     }
 }

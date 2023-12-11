@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @className: AdminFilter
- * @author: ZhaiJinPei
  * @discription: 处理非法访问后台 "/admin/*"
  */
 @WebFilter(filterName = "AdminFilter", urlPatterns = "/admin/*")

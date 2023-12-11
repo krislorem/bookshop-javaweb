@@ -1,6 +1,6 @@
 package com.example.bookshop.model;
 
-import lombok.Getter;
+import lombok.Data;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import java.util.List;
  * @author: ZhaiJinPei
  * @discription: 页信息
  */
-@Getter
+@Data
 public class Page {
     private int pageNumber;  //当前页码
     private int pageSize;    //每页最多展示商品数

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
 @Slf4j
 @WebServlet(name = "admin_user_list", urlPatterns = "/admin/user_list")
 public class AdminUserListServlet extends HttpServlet {
@@ -26,7 +27,7 @@ public class AdminUserListServlet extends HttpServlet {
             try {
                 pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
             } catch (Exception e) {
-                log.info("Exception",e);
+                log.info("Exception", e);
             }
         }
         if (pageNumber <= 0)

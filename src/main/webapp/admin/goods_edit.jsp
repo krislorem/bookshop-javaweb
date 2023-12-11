@@ -132,8 +132,8 @@
                                     selected="selected"
                                 </c:if>
                                 value="${t.id }">
-								${t.name } t,id=${t.id}
-						</option>
+                                ${t.name } t,id=${t.id}
+                        </option>
                     </c:forEach>
 
                 </select>

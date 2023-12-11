@@ -37,6 +37,8 @@ public class UserService {
             return true;
         } catch (SQLException e) {
             log.info("SQLException", e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         return false;
     }
@@ -45,7 +47,7 @@ public class UserService {
         User user = null;
         try {
             user = uDao.selectByUsernamePassword(ue, password);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             log.info("SQLException", e);
         }
         if (user != null) {
@@ -53,7 +55,7 @@ public class UserService {
         }
         try {
             user = uDao.selectByEmailPassword(ue, password);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             log.info("SQLException", e);
         }
         return user;
@@ -63,7 +65,7 @@ public class UserService {
         User u = null;
         try {
             u = uDao.selectById(id);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             log.info("SQLException", e);
         }
         return u;
@@ -72,7 +74,7 @@ public class UserService {
     public void updateUserAddress(User user) {
         try {
             uDao.updateUserAddress(user);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             log.info("SQLException", e);
         }
     }
@@ -80,7 +82,7 @@ public class UserService {
     public void updatePwd(User user) {
         try {
             uDao.updatePwd(user);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             log.info("SQLException", e);
         }
     }
@@ -92,14 +94,14 @@ public class UserService {
         int totalCount = 0;
         try {
             totalCount = uDao.selectUserCount();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             log.info("SQLException", e);
         }
         p.SetPageSizeAndTotalCount(pageSize, totalCount);
         List list = null;
         try {
             list = uDao.selectUserList(pageNumber, pageSize);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             log.info("SQLException", e);
         }
         p.setList(list);
@@ -110,7 +112,7 @@ public class UserService {
         try {
             uDao.delete(id);
             return true;
-        } catch (SQLException e) {
+        } catch (Exception e) {
             log.info("SQLException", e);
             return false;
         }

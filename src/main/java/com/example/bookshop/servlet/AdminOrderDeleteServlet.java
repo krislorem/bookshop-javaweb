@@ -13,7 +13,8 @@ import java.io.IOException;
 @WebServlet(name = "admin_order_delete", urlPatterns = "/admin/order_delete")
 public class AdminOrderDeleteServlet extends HttpServlet {
     private final OrderService oService = new OrderService();
-@Override
+
+    @Override
     protected void doGet(@NonNull HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         oService.delete(id);   //删除订单

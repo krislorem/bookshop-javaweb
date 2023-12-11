@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+
 @Slf4j
 @WebServlet(name = "admin_user_add", urlPatterns = "/admin/user_add")
 public class AdminUserAddServlet extends HttpServlet {
@@ -26,7 +27,7 @@ public class AdminUserAddServlet extends HttpServlet {
         try {
             BeanUtils.copyProperties(user, request.getParameterMap());
         } catch (IllegalAccessException | InvocationTargetException e) {
-            log.info("IllegalAccessException | InvocationTargetException",e);
+            log.info("IllegalAccessException | InvocationTargetException", e);
         }
         if (uService.register(user)) {
             request.setAttribute("msg", "客户添加成功！");

@@ -3,7 +3,10 @@ package com.example.bookshop.model;
 import com.example.bookshop.utils.PriceUtils;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Order {
     private int id;
@@ -18,19 +21,20 @@ public class Order {
     //    private Date datetime;  //订单日期 (日期格式与数据库的不兼容)
     private LocalDateTime datetime;  //订单日期(改后)
     private User user;
-    private Map<Integer,OrderItem> itemMap = new HashMap<Integer,OrderItem>();
+    private Map<Integer, OrderItem> itemMap = new HashMap<Integer, OrderItem>();
     private List<OrderItem> itemList = new ArrayList<OrderItem>();
 
     public void setUsername(String username) {
         user = new User();
         user.setUsername(username);
     }
+
     public void addGoods(Goods g) {
-        if(itemMap.containsKey(g.getId())) {
+        if (itemMap.containsKey(g.getId())) {
             OrderItem item = itemMap.get(g.getId());
-            item.setAmount(item.getAmount()+1);
-        }else {
-            OrderItem item = new OrderItem(g.getPrice(),1,g,this);
+            item.setAmount(item.getAmount() + 1);
+        } else {
+            OrderItem item = new OrderItem(g.getPrice(), 1, g, this);
             itemMap.put(g.getId(), item);
         }
         amount++;
@@ -46,22 +50,22 @@ public class Order {
     }
 
     public void lessen(int goodsid) {
-        if(itemMap.containsKey(goodsid)) {
+        if (itemMap.containsKey(goodsid)) {
             OrderItem item = itemMap.get(goodsid);
-            item.setAmount(item.getAmount()-1);
+            item.setAmount(item.getAmount() - 1);
             amount--;
             total = PriceUtils.subtract(total, item.getPrice());
-            if(item.getAmount()<=0) {
+            if (item.getAmount() <= 0) {
                 itemMap.remove(goodsid);
             }
         }
     }
-    public void delete(int goodsid)
-    {
-        if(itemMap.containsKey(goodsid)) {
+
+    public void delete(int goodsid) {
+        if (itemMap.containsKey(goodsid)) {
             OrderItem item = itemMap.get(goodsid);
-            total = PriceUtils.subtract(total, item.getAmount()*item.getPrice());
-            amount-=item.getAmount();
+            total = PriceUtils.subtract(total, item.getAmount() * item.getPrice());
+            amount -= item.getAmount();
             itemMap.remove(goodsid);
         }
     }
@@ -77,63 +81,83 @@ public class Order {
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public float getTotal() {
         return total;
     }
+
     public void setTotal(float total) {
         this.total = total;
     }
+
     public int getAmount() {
         return amount;
     }
+
     public void setAmount(int amount) {
         this.amount = amount;
     }
+
     public int getStatus() {
         return status;
     }
+
     public void setStatus(int status) {
         this.status = status;
     }
+
     public int getPaytype() {
         return paytype;
     }
+
     public void setPaytype(int paytype) {
         this.paytype = paytype;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getPhone() {
         return phone;
     }
+
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
     public String getAddress() {
         return address;
     }
+
     public void setAddress(String address) {
         this.address = address;
     }
+
     public LocalDateTime getDatetime() {
         return datetime;
     }
+
     public void setDatetime(LocalDateTime datetime) {
         this.datetime = datetime;
     }
+
     public User getUser() {
         return user;
     }
+
     public void setUser(User user) {
         this.user = user;
     }
+
     public Order() {
         super();
     }

@@ -1,6 +1,7 @@
 package com.example.bookshop.model;
 
 import lombok.Data;
+
 @SuppressWarnings("unused")
 @Data
 public class Recommend {

@@ -7,7 +7,7 @@
     <title>首页</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<%--    <link rel="shortcut icon" href="favicon.ico">--%>
+    <%--    <link rel="shortcut icon" href="favicon.ico">--%>
     <link rel="shortcut icon" href="https://pic1.imgdb.cn/item/635d4e7f16f2c2beb1394e9a.png">
     <link type="text/css" rel="stylesheet" href="css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="css/style.css">
@@ -47,24 +47,30 @@
                     <c:choose>
                         <c:when test="${status.first}">
                             <div class="item active">
-                                <h2 class="hdng"><a href="${pageContext.request.contextPath }/goods_detail?id=${g.id}">${g.name}</a><span></span></h2>
+                                <h2 class="hdng"><a
+                                        href="${pageContext.request.contextPath }/goods_detail?id=${g.id}">${g.name}</a><span></span>
+                                </h2>
                                 <p>今日精选推荐</p>
                                 <a class="banner_a" href="javascript:;" onclick="buy(${g.id})">立刻购买</a>
                                 <div class="banner-text">
                                     <a href="${pageContext.request.contextPath }/goods_detail?id=${g.id}">
-                                        <img class="banner-img" src="${pageContext.request.contextPath }${g.cover}" alt="${g.name}" width="350" height="350">
+                                        <img class="banner-img" src="${pageContext.request.contextPath }${g.cover}"
+                                             alt="${g.name}" width="350" height="350">
                                     </a>
                                 </div>
                             </div>
                         </c:when>
                         <c:otherwise>
                             <div class="item">
-                                <h2 class="hdng"><a href="${pageContext.request.contextPath }/goods_detail?id=${g.id}">${g.name}</a><span></span></h2>
+                                <h2 class="hdng"><a
+                                        href="${pageContext.request.contextPath }/goods_detail?id=${g.id}">${g.name}</a><span></span>
+                                </h2>
                                 <p>今日精选推荐</p>
                                 <a class="banner_a" href="javascript:;" onclick="buy(${g.id})">立刻购买</a>
                                 <div class="banner-text">
                                     <a href="${pageContext.request.contextPath }/goods_detail?id=${g.id}">
-                                        <img class="banner-img" src="${pageContext.request.contextPath }${g.cover}" alt="${g.name}" width="350" height="350">
+                                        <img class="banner-img" src="${pageContext.request.contextPath }${g.cover}"
+                                             alt="${g.name}" width="350" height="350">
                                     </a>
                                 </div>
                             </div>
@@ -98,7 +104,8 @@
             <c:forEach items="${hotList}" var="g">
                 <div class="col-md-4 gallery-grid glry-two">
                     <a href="${pageContext.request.contextPath }/goods_detail?id=${g.id}">
-                        <img src="${pageContext.request.contextPath }${g.cover}" class="img-responsive" alt="${g.name}" width="350" height="350"/>
+                        <img src="${pageContext.request.contextPath }${g.cover}" class="img-responsive" alt="${g.name}"
+                             width="350" height="350"/>
                     </a>
                     <div class="gallery-info galrr-info-two">
                         <p>
@@ -110,7 +117,7 @@
                     </div>
                     <div class="galy-info">
                         <p>${g.name}</p>
-<%--                        <p>${g.typeName} > ${g.name}</p>--%>
+                            <%--                        <p>${g.typeName} > ${g.name}</p>--%>
                         <div class="galry">
                             <div class="prices">
                                 <h5 class="item_price">¥ ${g.price}</h5>
@@ -130,7 +137,8 @@
             <c:forEach items="${newList}" var="g">
                 <div class="col-md-3 gallery-grid ">
                     <a href="${pageContext.request.contextPath }/goods_detail?id=${g.id}">
-                        <img src="${pageContext.request.contextPath }${g.cover}" class="img-responsive" alt="${g.name}"/>
+                        <img src="${pageContext.request.contextPath }${g.cover}" class="img-responsive"
+                             alt="${g.name}"/>
                     </a>
                     <div class="gallery-info">
                         <p>
@@ -142,7 +150,7 @@
                     </div>
                     <div class="galy-info">
                         <p>${g.name}</p>
-<%--                        <p>${g.typeName} > ${g.name}</p>--%>
+                            <%--                        <p>${g.typeName} > ${g.name}</p>--%>
                         <div class="galry">
                             <div class="prices">
                                 <h5 class="item_price">¥ ${g.price}</h5>

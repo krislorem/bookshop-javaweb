@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html>
@@ -37,10 +37,13 @@
                     <a href="${pageContext.request.contextPath }/goods_detail?id=${g.id}">
                         <div class="more-product"><span> </span></div>
                         <div class="product-img b-link-stripe b-animate-go  thickbox">
-                            <img src="${pageContext.request.contextPath }${g.cover}" class="img-responsive" alt="${g.name}" width="240" height="240">
+                            <img src="${pageContext.request.contextPath }${g.cover}" class="img-responsive"
+                                 alt="${g.name}" width="240" height="240">
                             <div class="b-wrapper">
                                 <h4 class="b-animate b-from-left  b-delay03">
-                                    <button href="${pageContext.request.contextPath }/goods_detail?id=${g.id}">查看详情</button>
+                                    <button href="${pageContext.request.contextPath }/goods_detail?id=${g.id}">
+                                        查看详情
+                                    </button>
                                 </h4>
                             </div>
                         </div>
@@ -50,7 +53,7 @@
                             <h4>${g.name}</h4>
                             <span class="item_price">¥ ${g.price}</span>
                             <input type="button" class="item_add items" value="加入购物车" onclick="buy(${g.id})">
-                            <div class="clearfix"> </div>
+                            <div class="clearfix"></div>
                         </div>
                     </div>
                 </div>
@@ -63,16 +66,15 @@
             <jsp:param name="url" value="${pageContext.request.contextPath }/goods_list"></jsp:param>
             <jsp:param name="param" value="&typeid=${id}"></jsp:param>
         </jsp:include>
-        </div>
     </div>
+</div>
 </div>
 <!--//products-->
 
 
-
-    <!--footer-->
-    <jsp:include page="footer.jsp"/>
-    <!--//footer-->
+<!--footer-->
+<jsp:include page="footer.jsp"/>
+<!--//footer-->
 
 
 </body>

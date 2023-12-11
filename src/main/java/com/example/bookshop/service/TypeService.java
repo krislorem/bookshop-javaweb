@@ -15,7 +15,7 @@ public class TypeService {
         List<Type> list = null;
         try {
             list = tDao.GetAllType();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             log.info("SQLException", e);
         }
         return list;
@@ -25,7 +25,7 @@ public class TypeService {
         Type type = null;
         try {
             type = tDao.selectTypeNameByID(typeid);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             log.info("SQLException", e);
         }
         return type;
@@ -35,7 +35,7 @@ public class TypeService {
         Type t = null;
         try {
             t = tDao.select(id);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             log.info("SQLException", e);
         }
         return t;
@@ -46,13 +46,15 @@ public class TypeService {
             tDao.insert(t);
         } catch (SQLException e) {
             log.info("SQLException", e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
     public void update(Type t) {
         try {
             tDao.update(t);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             log.info("SQLException", e);
         }
     }
@@ -61,7 +63,7 @@ public class TypeService {
         try {
             tDao.delete(id);
             return true;
-        } catch (SQLException e) {
+        } catch (Exception e) {
             log.info("SQLException", e);
             return false;
         }

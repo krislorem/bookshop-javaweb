@@ -13,7 +13,8 @@ import java.io.IOException;
 @WebServlet(name = "admin_goods_recommend", urlPatterns = "/admin/goods_recommend")
 public class AdminGoodsRecommendServlet extends HttpServlet {
     private final GoodsService gService = new GoodsService();
-@Override
+
+    @Override
     protected void doPost(@NonNull HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         String method = request.getParameter("method");

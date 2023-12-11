@@ -36,7 +36,7 @@ public class GoodsService {
         List<Map<String, Object>> list = null;
         try {
             list = gDao.getGoodsList(recommendType);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             log.info("SQLException", e);
         }
         return list;
@@ -46,7 +46,7 @@ public class GoodsService {
         List<Map<String, Object>> list = null;
         try {
             list = gDao.getScrollGood();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             log.info("SQLException", e);
         }
         return list;
@@ -58,6 +58,8 @@ public class GoodsService {
             list = gDao.selectGoodsByTypeID(typeID, pageNumber, pageSize);
         } catch (SQLException e) {
             log.info("SQLException", e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         return list;
     }
@@ -68,7 +70,7 @@ public class GoodsService {
         int totalCount = 0;
         try {
             totalCount = gDao.getCountOfGoodsByTypeID(typeID);    //获取该类商品总数
-        } catch (SQLException e) {
+        } catch (Exception e) {
             log.info("SQLException", e);
 
         }
@@ -77,7 +79,7 @@ public class GoodsService {
         List list = null;
         try {
             list = gDao.selectGoodsByTypeID(typeID, pageNumber, 8);    //根据商品类型id查找得商品List
-        } catch (SQLException e) {
+        } catch (Exception e) {
             log.info("SQLException", e);
         }
 
@@ -91,7 +93,7 @@ public class GoodsService {
         int totalCount = 0;
         try {
             totalCount = gDao.getRecommendCountOfGoodsByTypeID(type);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             log.info("SQLException", e);
         }
         p.SetPageSizeAndTotalCount(8, totalCount);
@@ -103,7 +105,7 @@ public class GoodsService {
                 g.setHot(gDao.isHot(g));
                 g.setNew(gDao.isNew(g));
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             log.info("SQLException", e);
         }
         p.setList(list);
@@ -114,7 +116,7 @@ public class GoodsService {
         Goods g = null;
         try {
             g = gDao.getGoodsById(id);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             log.info("SQLException", e);
         }
         return g;
@@ -127,7 +129,7 @@ public class GoodsService {
         try {
 //			totalCount = gDao.getGoodsCount(typeId);
             totalCount = gDao.getSearchCount(keyword);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             log.info("SQLException", e);
         }
         p.SetPageSizeAndTotalCount(8, totalCount);
@@ -135,7 +137,7 @@ public class GoodsService {
         try {
 //			list = gDao.selectGoods(keyword, pageNo, 8);
             list = gDao.selectSearchGoods(keyword, pageNumber, 8);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             log.info("SQLException", e);
         }
         p.setList(list);
@@ -145,7 +147,7 @@ public class GoodsService {
     public void addRecommend(int id, int type) {
         try {
             gDao.addRecommend(id, type);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             log.info("SQLException", e);
         }
     }
@@ -153,7 +155,7 @@ public class GoodsService {
     public void removeRecommend(int id, int type) {
         try {
             gDao.removeRecommend(id, type);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             log.info("SQLException", e);
         }
     }
@@ -161,7 +163,7 @@ public class GoodsService {
     public void insert(Goods goods) {
         try {
             gDao.insert(goods);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             log.info("SQLException", e);
         }
     }
@@ -169,7 +171,7 @@ public class GoodsService {
     public void update(Goods goods) {
         try {
             gDao.update(goods);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             log.info("SQLException", e);
 
         }
@@ -178,7 +180,7 @@ public class GoodsService {
     public void delete(int id) {
         try {
             gDao.delete(id);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             log.info("SQLException", e);
 
         }

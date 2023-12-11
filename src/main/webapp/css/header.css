@@ -202,7 +202,7 @@ textarea.form-control {
     min-height: calc(1.5em + .75rem + 2px)
 }
 
-.card_num{    /*购物车小红点提示*/
+.card_num { /*购物车小红点提示*/
     display: block;
     background: #f00;
     border-radius: 50%;
@@ -216,6 +216,7 @@ textarea.form-control {
     color: #fff;
     right: -14px;
 }
-.card_num:empty{    /*css伪类*/
-    display: none;    /*隐藏且不占位*/
+
+.card_num:empty { /*css伪类*/
+    display: none; /*隐藏且不占位*/
 }

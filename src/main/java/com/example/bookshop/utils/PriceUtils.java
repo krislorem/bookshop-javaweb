@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 /**
  * @className: PriceUtils
  * @author: ZhaiJinPei
- * @discription:  对购物车和订单金额进行计算
+ * @discription: 对购物车和订单金额进行计算
  * @version: 1.0
  */
 public class PriceUtils {

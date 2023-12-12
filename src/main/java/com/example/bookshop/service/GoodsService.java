@@ -42,9 +42,9 @@ public class GoodsService {
     public Page selectPageByTypeID(int typeID, int pageNumber) {
         Page p = new Page();
         p.setPageNumber(pageNumber);
-           int totalCount = (int) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).getCountOfGoodsByTypeID(typeID));    //获取该类商品总数
+        int totalCount = (int) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).getCountOfGoodsByTypeID(typeID));    //获取该类商品总数
         p.SetPageSizeAndTotalCount(8, totalCount);      //设置页大小及该类商品总数
-          List  list = (List<Goods>) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).selectGoodsByTypeID(typeID, pageNumber, 8));    //根据商品类型id查找得商品List
+        List list = (List<Goods>) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).selectGoodsByTypeID(typeID, pageNumber, 8));    //根据商品类型id查找得商品List
         p.setList(list);   //存入Page.List<Object>
         return p;
     }
@@ -52,14 +52,14 @@ public class GoodsService {
     public Page getGoodsRecommendPage(int type, int pageNumber) {
         Page p = new Page();
         p.setPageNumber(pageNumber);
-          int  totalCount = (int) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).getRecommendCountOfGoodsByTypeID(type));
+        int totalCount = (int) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).getRecommendCountOfGoodsByTypeID(type));
         p.SetPageSizeAndTotalCount(8, totalCount);
-           List list = (List<Goods>) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).selectGoodsByRecommend(type, (pageNumber - 1) * 8, 8));   //推荐类型所有商品详情List
-            for (Goods g : (List<Goods>) list) {
-                g.setScroll((boolean) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).isScroll(g)));
-                g.setHot((boolean) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).isHot(g)));
-                g.setNew((boolean) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).isNew(g)));
-            }
+        List list = (List<Goods>) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).selectGoodsByRecommend(type, (pageNumber - 1) * 8, 8));   //推荐类型所有商品详情List
+        for (Goods g : (List<Goods>) list) {
+            g.setScroll((boolean) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).isScroll(g)));
+            g.setHot((boolean) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).isHot(g)));
+            g.setNew((boolean) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).isNew(g)));
+        }
         p.setList(list);
         return p;
     }
@@ -71,27 +71,27 @@ public class GoodsService {
     public Page getSearchGoodsPage(String keyword, int pageNumber) {
         Page p = new Page();
         p.setPageNumber(pageNumber);
-            int totalCount = (int) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).getSearchCount(keyword));
+        int totalCount = (int) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).getSearchCount(keyword));
         p.SetPageSizeAndTotalCount(8, totalCount);
-          List  list = (List<Goods>) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).selectSearchGoods(keyword, (pageNumber - 1) * 8, 8));
+        List list = (List<Goods>) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(GoodsMapper.class).selectSearchGoods(keyword, (pageNumber - 1) * 8, 8));
         p.setList(list);
         return p;
     }
 
     public void addRecommend(int id, int type) {
-            MyBatisUtils.executeUpdate(sqlSession -> sqlSession.getMapper(GoodsMapper.class).addRecommend(id, type));
+        MyBatisUtils.executeUpdate(sqlSession -> sqlSession.getMapper(GoodsMapper.class).addRecommend(id, type));
     }
 
     public void removeRecommend(int id, int type) {
-            MyBatisUtils.executeUpdate(sqlSession -> sqlSession.getMapper(GoodsMapper.class).removeRecommend(id, type));
+        MyBatisUtils.executeUpdate(sqlSession -> sqlSession.getMapper(GoodsMapper.class).removeRecommend(id, type));
     }
 
     public void insert(Goods goods) {
-            MyBatisUtils.executeUpdate(sqlSession -> sqlSession.getMapper(GoodsMapper.class).insert(goods));
+        MyBatisUtils.executeUpdate(sqlSession -> sqlSession.getMapper(GoodsMapper.class).insert(goods));
     }
 
     public void update(Goods goods) {
-            MyBatisUtils.executeUpdate(sqlSession -> sqlSession.getMapper(GoodsMapper.class).update(goods));
+        MyBatisUtils.executeUpdate(sqlSession -> sqlSession.getMapper(GoodsMapper.class).update(goods));
     }
 
     public void delete(int id) {

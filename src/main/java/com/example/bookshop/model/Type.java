@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+
 @SuppressWarnings("unused")
 @Slf4j
 @Data
@@ -25,10 +26,12 @@ public class Type {
         this.name = name;
         this.encodeName = URLEncoder.encode(name, StandardCharsets.UTF_8);
     }
+
     public Type(int id) {
         super();
         this.id = id;
     }
+
     public Type(int id, String name) {
         super();
         this.id = id;

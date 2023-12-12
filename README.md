@@ -1,4 +1,10 @@
 # Bookshop
+![l](https://img.shields.io/badge/组长-翟金培-purple)
+![l](https://img.shields.io/badge/组员-仇星-blue)
+![l](https://img.shields.io/badge/组员-李方圆-blue)
+![l](https://img.shields.io/badge/组员-陈也-blue)
+![l](https://img.shields.io/badge/组员-殷文喧-blue)
+![l](https://img.shields.io/badge/组员-蔡吴江-blue)
 
 
 ​	    	本项目是一个实现网上图书商城的项目，分前台和后台管理系统，属于B/S交互系统。
@@ -62,9 +68,11 @@
     - 购物车模块
     - 商品分类查询功能
     - 商品搜索功能
+    - JS表单验证
 - 后台
     - 商品管理模块
         - 添加
+            - 图片上传
         - 修改
         - 删除
         - 加入or移出条幅推荐
@@ -96,7 +104,7 @@
 |:-------------:|:--------:|:-------------------------------------------:|
 | IntelliJ IDEA | 2023.2.1 |  D:\ideaProfession\IntelliJ IDEA 2023.2.1   |
 |    Tomcat     |  9.0.83  |        D:\tools\apache-tomcat-9.0.83        |
-|     JDK17     |  17.0.4  |               F:\jdk-17.0.4.1               |
+|     JDK17     |  17.0.9  |               F:\jdk-17.0.4.1               |
 | Windows11专业版  |   22H3   |                     C盘                      |
 |     MySQL     |  8.0.32  | C:\Program Files\MySQL\MySQL Server 8.0\bin |
 
@@ -105,12 +113,13 @@
 
 #### &#127827;安装教程
 
-1.  直接git clone本项目到IDEA，用IDEA打开.
-1.  用数据库可视化工具新建名为`bookshop`的数据库，然后执行本项目resource里的`bookshop_localhost-dump.sql`中的sql语句建表.
-1.  配置Tomcat
+1.  直接git clone本项目，在IDEA中打开.
+1.  新建名为`bookshop`的数据库，然后执行项目resource里的`bookshop_localhost-dump.sql`中的sql语句建表.
+1.  配置Tomcat9
 1.  配置maven依赖
-1.  修改`c3p0-config.xml`数据库连接池配置文件
-1.  运行Tomcat
+1.  修改`druid.properties`数据库连接池配置文件
+1.  修改`mybatis-config.xml`mybatis配置文件
+1.  运行Tomcat9
 
 
 #### &#129;小组成员

@@ -3,7 +3,7 @@
 <div class="footer">
     <div class="container">
         <div class="text-center">
-            <p>39翟金培 33殷文喧 © 2023-2024 期末项目</p>
+            <p>39翟金培 03仇星 22李方圆 23陈也 33殷文喧 40蔡吴江 © 2023-2024 期末项目</p>
         </div>
     </div>
 </div>

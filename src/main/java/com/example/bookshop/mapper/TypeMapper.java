@@ -1,6 +1,7 @@
 package com.example.bookshop.mapper;
 
 import com.example.bookshop.model.Type;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -25,6 +26,6 @@ public interface TypeMapper {
     @Select("update type set name=#{t.name} where id =#{t.id}")
     Object update(@Param("t") Type t);
 
-    @Select("delete from type where id = #{id}")
-    Object delete(@Param("id") int id);
+    @Delete("delete from type where id = #{id}")
+    boolean delete(@Param("id") int id);
 }

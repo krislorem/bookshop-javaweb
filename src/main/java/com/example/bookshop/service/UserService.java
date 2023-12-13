@@ -63,6 +63,6 @@ public class UserService {
     }
 
     public boolean delete(int id) {
-        return MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(UserMapper.class).delete(id)) == null;
+        return (boolean) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(UserMapper.class).delete(id));
     }
 }

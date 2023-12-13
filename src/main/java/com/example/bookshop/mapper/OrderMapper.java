@@ -2,21 +2,20 @@ package com.example.bookshop.mapper;
 
 import com.example.bookshop.model.Order;
 import com.example.bookshop.model.OrderItem;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.math.BigInteger;
 import java.util.List;
 
 public interface OrderMapper {
-    @Select("insert into `order`(total,amount,status,paytype,name,phone,address,datetime,user_id) values(#{o.total},#{o.amount},#{o.status},#{o.paytype},#{o.name},#{o.phone},#{o.address},#{o.datetime},#{o.user.id})")
-    Object insertOrder(@Param("o") Order o);
+    @Insert("insert into `order`(total,amount,status,paytype,name,phone,address,datetime,user_id) values(#{o.total},#{o.amount},#{o.status},#{o.paytype},#{o.name},#{o.phone},#{o.address},#{o.datetime},#{o.user.id})")
+    int insertOrder(@Param("o") Order o);
 
     @Select("select last_insert_id()")
     BigInteger getLastInsertId();
 
-    @Select("insert into orderitem(price,amount,goods_id,order_id) values(#{i.price},#{i.amount},#{i.goods.id},#{i.order.id})")
-    Object insertOrderItem(@Param("i") OrderItem i);
+    @Insert("insert into orderitem(price,amount,goods_id,order_id) values(#{i.price},#{i.amount},#{i.goods.id},#{i.order.id})")
+    int insertOrderItem(@Param("i") OrderItem i);
 
     @Select("select * from `order` where user_id=#{userid} order by datetime desc")
     List<Order> selectAll(@Param("userid") int userid);
@@ -52,12 +51,12 @@ public interface OrderMapper {
             """)
     List<Order> selectOrderList(@Param("status") int status, @Param("pageNumber") int pageNumber, @Param("pageSize") int pageSize);
 
-    @Select("update `order` set status=#{status} where id = #{id}")
-    Object updateStatus(@Param("id") int id, @Param("status") int status);
+    @Update("update `order` set status=#{status} where id = #{id}")
+    int updateStatus(@Param("id") int id, @Param("status") int status);
 
-    @Select("delete from orderitem where order_id=#{id}")
-    Object deleteOrder(@Param("id") int id);
+    @Delete("delete from order where id=#{id}")
+    int deleteOrder(@Param("id") int id);
 
-    @Select("delete from orderitem where order_id=#{id}")
-    Object deleteOrderItem(@Param("id") int id);
+    @Delete("delete from orderitem where order_id=#{id}")
+    int deleteOrderItem(@Param("id") int id);
 }

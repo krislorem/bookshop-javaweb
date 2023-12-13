@@ -1,8 +1,7 @@
 package com.example.bookshop.mapper;
 
 import com.example.bookshop.model.Goods;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 import java.util.Map;
@@ -89,18 +88,18 @@ public interface GoodsMapper {
     @Select("select exists(select * from recommend where type=3 and goods_id=#{g.id})")
     boolean isNew(@Param("g") Goods g);
 
-    @Select("insert into recommend(type,goods_id) values(#{type},#{id})")
-    Object addRecommend(@Param("id") int id, @Param("type") int type);
+    @Insert("insert into recommend(type,goods_id) values(#{type},#{id})")
+    int addRecommend(@Param("id") int id, @Param("type") int type);
 
-    @Select("delete from recommend where type=#{type} and goods_id=#{id}")
-    Object removeRecommend(@Param("id") int id, @Param("type") int type);
+    @Delete("delete from recommend where type=#{type} and goods_id=#{id}")
+    int removeRecommend(@Param("id") int id, @Param("type") int type);
 
-    @Select("insert into goods(name,cover,image1,image2,price,author,press,isbn,intro,stock,type_id) values(#{g.name},#{g.cover},#{g.image1},#{g.image2},#{g.price},#{g.author},#{g.press},#{g.isbn},#{g.intro},#{g.stock},#{g.type.id})")
-    Object insert(@Param("g") Goods g);
+    @Insert("insert into goods(name,cover,image1,image2,price,author,press,isbn,intro,stock,type_id) values(#{g.name},#{g.cover},#{g.image1},#{g.image2},#{g.price},#{g.author},#{g.press},#{g.isbn},#{g.intro},#{g.stock},#{g.type.id})")
+    int insert(@Param("g") Goods g);
 
-    @Select("update goods set name=#{g.name},cover=#{g.cover},image1=#{g.image1},image2=#{g.image2},price=#{g.price},author=#{g.author},press=#{g.press},isbn=#{g.isbn},intro=#{g.intro},stock=#{g.stock},type_id=#{g.type.id} where id=#{g.id}")
-    Object update(@Param("g") Goods g);
+    @Update("update goods set name=#{g.name},cover=#{g.cover},image1=#{g.image1},image2=#{g.image2},price=#{g.price},author=#{g.author},press=#{g.press},isbn=#{g.isbn},intro=#{g.intro},stock=#{g.stock},type_id=#{g.type.id} where id=#{g.id}")
+    int update(@Param("g") Goods g);
 
-    @Select("delete from goods where id = #{id}")
-    Object delete(@Param("id") int id);
+    @Delete("delete from goods where id = #{id}")
+    int delete(@Param("id") int id);
 }

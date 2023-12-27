@@ -13,6 +13,7 @@
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/messages_zh.min.js"></script>
     <script>
+
         $(document).ready(function () {
             // 项目一开始就要初始化验证
             $("#goodsedit").validate({
@@ -40,7 +41,6 @@
                 return this.optional(element) || (price.test(value));
             }, "请输入正确的价格");
         })
-
     </script>
 </head>
 <body>

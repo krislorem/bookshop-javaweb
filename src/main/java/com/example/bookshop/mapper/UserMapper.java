@@ -36,6 +36,6 @@ public interface UserMapper {
     @Select("select * from user limit #{pageNo},#{pageSize}")
     List<User> selectUserList(@Param("pageNo") int pageNo, @Param("pageSize") int pageSize);
 
-    @Delete("delete from user where id = #{id}")
+    @Delete("delete from `user` where id = #{id}")
     boolean delete(@Param("id") int id);
 }

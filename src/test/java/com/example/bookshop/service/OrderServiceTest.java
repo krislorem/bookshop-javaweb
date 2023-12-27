@@ -1,13 +1,17 @@
 package com.example.bookshop.service;
 
+import com.example.bookshop.model.Order;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+
+import java.sql.SQLException;
+
 @Slf4j
 class OrderServiceTest {
 OrderService service = new OrderService();
     @Test
-    void addOrder() {
-
+    void addOrder() throws SQLException {
+        service.addOrder(new Order());
     }
 
     @Test
@@ -26,5 +30,6 @@ OrderService service = new OrderService();
 
     @Test
     void delete() {
+        service.delete(25);
     }
 }

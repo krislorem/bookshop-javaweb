@@ -44,6 +44,6 @@ class TypeServiceTest {
 
     @Test
     void delete() {
-        log.info(MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(TypeMapper.class).delete(18)).toString());
+        log.info(String.valueOf((boolean) MyBatisUtils.executeUpdate(sqlSession -> sqlSession.getMapper(TypeMapper.class).delete(19))));
     }
 }

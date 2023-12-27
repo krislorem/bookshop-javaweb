@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+User -up-> (用户登录)
+User -up-> (用户注册)
+User -left-> (购物车)
+User -down-> (商品分类查询)
+User -> (商品搜索)
+
+Admin -up-> (客户管理)
+Admin -up-> (商品管理)
+Admin ---> (订单管理)
+Admin ---> (商品类目管理)
+(客户管理) .up.> (添加,修改,删除客户):include
+(客户管理) .> (重置密码):include
+(商品管理) .> (添加,修改,删除):include
+(商品管理) .down.> (图片上传):include
+(商品管理) .left.> (加入or移出条幅推荐):include
+(商品管理) .up.> (加入or移出热销推荐):include
+(商品管理) .down.> (加入or移出新品推荐):include
+(订单管理) .left.> (全部订单页):include
+(订单管理) .left.> (未付款页):include
+(订单管理) .down.> (已付款页):include
+(订单管理) .up.> (配送中页):include
+(订单管理) .> (已完成页):include
+
+
+@enduml

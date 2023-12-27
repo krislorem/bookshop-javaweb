@@ -31,6 +31,6 @@ public class TypeService {
     }
 
     public boolean delete(Integer id) {
-        return (boolean) MyBatisUtils.executeQuery(sqlSession -> sqlSession.getMapper(TypeMapper.class).delete(id));
+        return (boolean) MyBatisUtils.executeUpdate(sqlSession -> sqlSession.getMapper(TypeMapper.class).delete(id));
     }
 }

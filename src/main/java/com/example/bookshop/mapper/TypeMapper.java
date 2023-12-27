@@ -1,9 +1,7 @@
 package com.example.bookshop.mapper;
 
 import com.example.bookshop.model.Type;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -19,13 +17,13 @@ public interface TypeMapper {
     Type select(@Param("id") int id);
 
 
-    @Select("insert into type(name) values(#{t.name})")
+    @Insert("insert into type(name) values(#{t.name})")
     Object insert(@Param("t") Type t);
 
 
-    @Select("update type set name=#{t.name} where id =#{t.id}")
+    @Update("update type set name=#{t.name} where id =#{t.id}")
     Object update(@Param("t") Type t);
 
-    @Delete("delete from type where id = #{id}")
+    @Delete("delete from `type` where id = #{id}")
     boolean delete(@Param("id") int id);
 }

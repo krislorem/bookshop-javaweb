@@ -54,9 +54,9 @@ public interface OrderMapper {
     @Update("update `order` set status=#{status} where id = #{id}")
     int updateStatus(@Param("id") int id, @Param("status") int status);
 
-    @Delete("delete from order where id=#{id}")
+    @Delete("delete from `order` where id = #{id}")
     int deleteOrder(@Param("id") int id);
 
-    @Delete("delete from orderitem where order_id=#{id}")
+    @Delete("delete from `orderitem` where order_id=#{id}")
     int deleteOrderItem(@Param("id") int id);
 }

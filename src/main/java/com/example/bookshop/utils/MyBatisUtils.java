@@ -40,13 +40,14 @@ public class MyBatisUtils {
      *
      * @param func 需要执行的语句代码块
      */
-    public static void executeUpdate(Function<SqlSession, Object> func) {
+    public static Object executeUpdate(Function<SqlSession, Object> func) {
         SqlSession sqlSession = sqlSessionFactory.openSession(false);
         // 手动提交/回滚事务
         try {
             Object obj = func.apply(sqlSession);
             // 手动提交事务
             sqlSession.commit();
+            return obj;
         } catch (Exception e) {
             // 回滚事务
             sqlSession.rollback();
